@@ -10,12 +10,10 @@ export default class CartItem extends Component {
         super(props);
         console.log("cart item created", props.item.id);
     }
+ 
 
-    componentWillReceiveProps(nextProps) {
-        //update qty on update cycle
-        this.setState({
-            qty: nextProps.item.qty
-        });
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.item != this.props.item;
     }
 
      
@@ -36,21 +34,23 @@ export default class CartItem extends Component {
                 <Text style={styles.price}>Rs: {item.price}</Text>
  
 
-                <Text>Qty: {item.qty}</Text>
+                <Text>Qty: {item.qty} </Text>
 
-                <Text>RS: {item.price * item.qty}</Text>
+                <Text> RS: {item.price * item.qty}</Text>
  
+                {/* increse qty by 1, Cart comp, updateItem method */}
                 <Ionicons name="md-add-circle"  size={32} color="green"
-                            onPress={() => {}}
+                            onPress={() => {this.props.updateItem(item.id, item.qty + 1)}}
                 />
  
-                
+                {/* reduce qty by 1 */}
                 <Ionicons name="md-remove-circle"  size={32} color="orange"
-                            onPress={() => {} }
+                            onPress={() => {this.props.updateItem(item.id, item.qty - 1)} }
                 />
 
+                {/* remove item from cart */}
                 <Ionicons name="md-trash"  size={32} color="red"
-                            onPress={() =>  () => {}  }
+                            onPress={() => {this.props.removeItem(item.id)}  }
                 />
                 
 

@@ -4,7 +4,14 @@ import {View, Text} from "react-native";
 
 // import PropTypes from "prop-types";
 
-export default class CartSummary extends React.Component {
+// PureComponent, is part of React Library
+// Pure component implements shouldComponentUpdate already
+// pure component also compare functions and objects
+// shallow comparasion, compare two refs
+// current State with nextState, current props with next Props
+// return or false
+
+export default class CartSummary extends React.PureComponent {
     // creation cycle, once once
     constructor(props) {
         super(props);
@@ -42,15 +49,18 @@ export default class CartSummary extends React.Component {
     // Stop summary render being called
     // when? called on parent render, on update cycle only
     // when? called on this.setState, on update cycle
-    shouldComponentUpdate(nextProps, nextState) {
-        console.log("Summary shouldComponent Update")
-        return nextProps.amount != this.props.amount ||
-               nextProps.totalItems != this.props.totalItems ||
-               nextState.discount != this.state.discount;
 
-        // return true; // render shall be called
-        // false, render is not called
-    }
+    // as it is implemented in PureComponent
+
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.log("Summary shouldComponent Update")
+    //     return nextProps.amount != this.props.amount ||
+    //            nextProps.totalItems != this.props.totalItems ||
+    //            nextState.discount != this.state.discount;
+
+    //     // return true; // render shall be called
+    //     // false, render is not called
+    // }
 
     render() {
             console.log("cart summary render");

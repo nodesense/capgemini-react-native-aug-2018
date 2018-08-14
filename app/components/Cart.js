@@ -104,12 +104,38 @@ export default class Cart extends React.Component {
 
 
     removeItem(id) {
+        console.log('remove item ', id)
         // TODO
+        // remove item in immutable way, create a new array ,exclude the existing item
+        // include all items except item.id != id, return new array
+        let clonedItems = this.state.items.filter (item => item.id != id);
+        this.setState({
+            items: clonedItems
+        })
+        this.recalculate(clonedItems);
     }
 
     updateItem(id, qty) {
         console.log("update ", id, qty);
-        // TODO
+        // immutablity with array level/items , new array, CartList comp
+        // immutablity with inside object /item {qty: }, CartItem
+
+        // clone of an array
+        let clonedItems = this.state.items.map (item => {
+            // clone/immutablity of item
+            if (item.id == id) { // an item, that should be updated
+                let clonedItem = {...item, qty: qty}
+                return clonedItem;
+            }
+            //else, return item as it is
+            return item;
+        })
+
+        this.setState({
+            items: clonedItems
+        })
+
+        this.recalculate(clonedItems);
     }
 
     empty() {
@@ -137,31 +163,34 @@ export default class Cart extends React.Component {
         console.log("cart render");
          
          
-        return (
-                <View style={styles.container}>
-                    <Text>{this.props.title}</Text>
+return (
+        <View style={styles.container}>
+            <Text>{this.props.title}</Text>
 
-                    <Button title="Add"
-                             onPress={() => this.addItem()}
-                    />
+            <Button title="Add"
+                        onPress={() => this.addItem()}
+            />
 
-                    <Button title="Refresh"
-                             onPress={() => this.refresh()}
-                    /> 
+            <Button title="Refresh"
+                        onPress={() => this.refresh()}
+            /> 
 
-                    <Button title="Empty"
-                             onPress={() => this.empty()}
-                    /> 
+            <Button title="Empty"
+                        onPress={() => this.empty()}
+            /> 
 
-                    <CartList  items={this.state.items}
-                     />
+            {/* pass removeItem, updateItem to child */}
+            <CartList  items={this.state.items}
+                       removeItem= { (id) => this.removeItem(id)}
+                       updateItem= { (id, qty) => this.updateItem(id, qty)}
+                />
 
-                    <CartSummary amount={this.state.amount}
-                                 totalItems={this.state.totalItems}
-                     />
+            <CartSummary amount={this.state.amount}
+                            totalItems={this.state.totalItems}
+                />
 
-                </View>
-        )
+        </View>
+)
     }
 
 }

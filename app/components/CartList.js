@@ -14,6 +14,7 @@ export default class CartList extends Component {
     // stop cart list being rendered unnessasry
     shouldComponentUpdate(nextProps, nextState) {
         console.log("CartList should component update");
+        // shallow compare, compare two refs
         return nextProps.items != this.props.items;
     }
  
@@ -32,7 +33,11 @@ export default class CartList extends Component {
 
                     {
                         items.map ( item => (
-                            <CartItem item={item} key={item.id} >
+                            <CartItem item={item} 
+                                      key={item.id} 
+                                      updateItem={this.props.updateItem}
+                                      removeItem={this.props.removeItem}
+                                      >
                             </CartItem>
                         ))
                     }
