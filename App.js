@@ -6,7 +6,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Home from './app/components/Home';
 import Counter from "./app/components/Counter";
 import Cart from "./app/components/Cart";
-
+import Profile from "./app/components/Profile";
 
 // React Navigation
 import {createBottomTabNavigator} from 'react-navigation';
@@ -15,7 +15,8 @@ import {createBottomTabNavigator} from 'react-navigation';
 let TabNavigation = createBottomTabNavigator({
   Home: Home,
   'Counter': Counter,
-  Cart: Cart
+  Cart: Cart,
+  Profile: Profile
 })
 
 // App is parent component
@@ -35,7 +36,7 @@ export default class App extends React.Component {
         <Text>Welcome to React Native</Text>
 
         <TabNavigation />
-        
+
         {/* 
         <Home />
         <Counter starter={100}  />  

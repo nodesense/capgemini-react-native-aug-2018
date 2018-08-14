@@ -20,6 +20,11 @@ export default class Counter extends React.Component {
     }
   }
 
+  // keyword, used only if props not passed from parent
+  static defaultProps = {
+    starter: 100
+  }
+
   // // increment is called by react function
   // this is undefined in react context
   // increment() {

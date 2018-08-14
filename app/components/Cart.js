@@ -1,6 +1,10 @@
 import React from "react";
 
-import {View, Text, Button, StyleSheet} from "react-native";
+import {View, Text, 
+        Button, 
+        StyleSheet,
+        Slider
+    } from "react-native";
 
 import CartList from "./CartList";
 import CartSummary from "./CartSummary";
@@ -17,7 +21,8 @@ export default class Cart extends React.Component {
             items: [{name: 'p1', qty: 1, price: 100, id: 10}],
             amount: 0,
             totalItems: 0,
-            flag: true
+            flag: true,
+            proficiency: 10
         }
     }
 
@@ -178,6 +183,15 @@ return (
             <Button title="Empty"
                         onPress={() => this.empty()}
             /> 
+
+            <Text> Prof {this.state.proficiency} </Text>
+
+             <Slider
+                        step={1}
+                        maximumValue={100}
+                        onValueChange={( value ) => this.setState({proficiency: value})}
+                        value={this.state.proficiency}
+            />
 
             {/* pass removeItem, updateItem to child */}
             <CartList  items={this.state.items}
