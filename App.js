@@ -7,6 +7,17 @@ import Home from './app/components/Home';
 import Counter from "./app/components/Counter";
 import Cart from "./app/components/Cart";
 
+
+// React Navigation
+import {createBottomTabNavigator} from 'react-navigation';
+
+//TabNavigation is a component
+let TabNavigation = createBottomTabNavigator({
+  Home: Home,
+  'Counter': Counter,
+  Cart: Cart
+})
+
 // App is parent component
 // Home is a child component
  
@@ -23,12 +34,13 @@ export default class App extends React.Component {
       <View style={styles.container}>
         <Text>Welcome to React Native</Text>
 
+        <TabNavigation />
+        
         {/* 
         <Home />
         <Counter starter={100}  />  
-        */}
-
         <Cart />
+        */}
        
 
       </View>
