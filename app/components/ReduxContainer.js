@@ -39,6 +39,8 @@ function mapDispatchToProps(dispatch) {
                 type: 'INCREMENT',
                 payload: {value: 1}
             }
+
+            dispatch(action);
         }
     }
 }
