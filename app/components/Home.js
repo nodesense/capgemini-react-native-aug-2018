@@ -19,7 +19,6 @@ export default class Home extends React.Component {
   // member function for es6 class
   onButtonPress () {
     // alert
-    Alert.alert("Button Pressed");
 
     // Action Creator function, helper function
     // actions.js
