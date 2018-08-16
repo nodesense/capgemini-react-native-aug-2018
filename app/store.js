@@ -1,4 +1,4 @@
-import {createStore} from 'redux';
+import {createStore, combineReducers} from 'redux';
 
 // FLUX- One one Store per React application
 // Many States can be there in a store
@@ -24,6 +24,18 @@ function counterReducer(state = 0, action) {
 }
 
 // store shall call reducer, whenever we do store.dispatch
-const store = createStore(counterReducer)
+// store shall also reducer, very first time while doing createStore
+// to initialize default state
+// const store = createStore(counterReducer)
+//  store.getState() returns value 0 (number) with single reducer
+
+const rootReducer = combineReducers({
+    // stateName: reducer function() {}
+    counter: counterReducer, 
+    // add as many state with reducers
+})
+
+const store = createStore(rootReducer)
+// store.getState(), output?? { counter: 0 } object type
 
 export default store;

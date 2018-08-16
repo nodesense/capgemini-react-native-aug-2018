@@ -6,6 +6,9 @@ import React from 'react';
 // named export and import
 import {View, Text, Button, Alert} from 'react-native';
 
+// Using Raw Redux API into React,Is Best practice? NO, 
+// We should use React-Redux Library
+
 import store from "../store";
 
 // React Create object for Home component
@@ -33,6 +36,9 @@ export default class Home extends React.Component {
   componentDidMount() {
     // subscribe from redux store
     // callback method, called after every dispatch
+    // when susbcribe called, all your reducers are executed
+    // states are stored by store
+    // susbcribe is called even if no changes found
     store.subscribe ( ()=> {
       console.log("Home Subs called");
       this.forceUpdate(); // render method
@@ -45,7 +51,8 @@ export default class Home extends React.Component {
   render() {
     // Get value from store
     console.log('Home Render')
-    let counter = store.getState()
+    // state => {counter: 0}
+    let counter = store.getState().counter
 
     // JSX View
      return (

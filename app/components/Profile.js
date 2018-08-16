@@ -29,7 +29,7 @@ export default class Profile extends React.Component {
     }
 
     render() {
-        let counter = store.getState();
+        let counter = store.getState().counter;
 
         return (
             <View style= { styles.container }>
