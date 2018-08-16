@@ -8,6 +8,17 @@ import Counter from "./app/components/Counter";
 import Cart from "./app/components/Cart";
 import Profile from "./app/components/Profile";
 
+// import default is always alias name
+import ReduxCounter from "./app/components/ReduxContainer";
+
+// Trying to integrate Provider with store, 
+// so that containers can use store
+// only one store per application
+// multiple state maintained by reducers
+import {Provider} from 'react-redux';
+import store from "./app/store";
+
+
 // React Navigation
 import {createBottomTabNavigator} from 'react-navigation';
 
@@ -16,7 +27,8 @@ let TabNavigation = createBottomTabNavigator({
   Home: Home,
   'Counter': Counter,
   Cart: Cart,
-  Profile: Profile
+  Profile: Profile,
+  Redux: ReduxCounter
 })
 
 // App is parent component
@@ -29,7 +41,7 @@ let TabNavigation = createBottomTabNavigator({
 // child to parent communication
 // JavaScript function callback
 
-export default class App extends React.Component {
+class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
@@ -48,6 +60,16 @@ export default class App extends React.Component {
     );
   }
 }
+
+
+export default function AppProvider() {
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  )
+}
+
 
 const styles = StyleSheet.create({
   container: {
