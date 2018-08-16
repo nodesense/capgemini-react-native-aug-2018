@@ -21,11 +21,22 @@ export default class Home extends React.Component {
     // alert
     Alert.alert("Button Pressed");
 
+    // Action Creator function, helper function
+    // actions.js
+    function incrementAction(value) {
+      return {type: 'INCREMENT', 
+      payload: {
+        value: value
+      }}
+    }
+
     // or create action creators to create this action
-    let action = {type: 'INCREMENT', 
-                  payload: {
-                    value: 10
-                  }}
+    // let action = {type: 'INCREMENT', 
+    //               payload: {
+    //                 value: 10
+    //               }}
+
+    let action = incrementAction(10)
 
     // store internally calls reducer, pass action as second parameter
     // what about reducer state param? store shall pass state internally
